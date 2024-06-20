@@ -1,0 +1,14 @@
+api:
+  config:
+    basepath: "course"
+    port: "8081"
+sfdc:
+  auth:
+    host: "login.salesforce.com"
+    username: "ndasanbiagio@gmail.com"
+    password: "Nico2629!"
+    security_token: "7gm3KZQd95YTIYQkF94B9nP7o"
+    client_id: "3MVG91oqviqJKoEGqzGWrPOvTKMjDLReXbd_ZqfxWSos7ptyO.H6shpumHQFTYXFC8o_iX6cNyC9cNl_CbNsa"
+    client_secret: "464ACA7CF337740A590C13E2E93EE0077A51EAD5167EBBF0BF15382A2165781D"
+  endpoint:
+    host: "lffconsultoria-dev-ed.my.salesforce.com"

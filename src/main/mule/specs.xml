@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="specs-Rest" doc:id="1e365e1c-9c65-40f5-9e98-f4b778cb5f52" >
+		<http:listener doc:name="Listener" doc:id="0cf752b2-4901-4850-8b3a-ef1804adcad1" config-ref="HTTP_Listener_config" path="rest/*"/>
+		<logger level="INFO" doc:name="Logger" doc:id="3806781b-9c94-458f-bb91-65f2e28bba95" message="Chegou Rest"/>
+		<apikit:router doc:name="APIkit Router" doc:id="8f4e10cc-bd74-46c1-84cf-e250ede95659" config-ref="RouterRest"/>
+	</flow>
+	<flow name="specs-Component" doc:id="9cec8260-ec14-4d54-bda4-59924e26c2b7" >
+		<http:listener doc:name="Listener" doc:id="e4bf2023-0a58-489a-afab-e6afcaa11e50" config-ref="HTTP_Listener_config" path="component/*"/>
+		<logger level="INFO" doc:name="Logger" doc:id="9ea032a2-a857-4884-96c5-a168d0e90a8b" message="Chegou Component"/>
+		<apikit:router doc:name="APIkit Router" doc:id="37a169c9-5079-4915-9454-fc0596b1334a" config-ref="RouterComponent"/>
+	</flow>
+</mule>
