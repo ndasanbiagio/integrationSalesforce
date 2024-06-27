@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="demo-03-consulta-flow" doc:id="370e576e-7080-4d20-8f61-7926a02c39f9" >
+		<set-variable value="#[vars.requestPayload.select]" doc:name="Query" doc:id="be148c9f-0c30-417e-afa1-2f83d140df78" variableName="query"/>
+		<flow-ref doc:name="Login" doc:id="3fe98588-be95-4ddb-bc30-9da3fdf8981e" name="demo-01-rest-flow" target="sfdc_token" targetValue="#[payload.access_token]"/>
+		<http:request method="GET" doc:name="Request" doc:id="cefc02e9-0d85-43a7-bf2e-11a2da11962a" config-ref="SFDC_ENDPOINT" path="/services/data/v51.0/query" >
+			<http:body ><![CDATA[#[{}]]]></http:body>
+			<http:headers ><![CDATA[#[{
+	Authorization: "Bearer " ++ vars.sfdc_token
+}]]]></http:headers>
+			<http:query-params ><![CDATA[#[{
+	q: vars.query
+}]]]></http:query-params>
+		</http:request>
+	</flow>
+</mule>

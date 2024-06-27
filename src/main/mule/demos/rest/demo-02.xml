@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<flow name="demo-02-insert-flow" doc:id="02bcdc92-ef33-4935-ba52-5bac5a6c4bbb" >
+		<set-variable value="Account" doc:name="Object Name" doc:id="f4e70716-cd0b-463f-af0e-0f3b330b5a47" variableName="objectName"/>
+		<flow-ref doc:name="Realiza Autenticação" doc:id="dc69a077-10b7-4ebc-a634-1fc87d9113ee" name="demo-01-rest-flow" target="sfdc_token" targetValue="#[payload.access_token]"/>
+		<ee:transform doc:name="Build Body" doc:id="f8d3716d-9eec-44ba-83a8-f9617f3202bc">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"name": vars.requestPayload.nome,
+	"AccountNumber": vars.requestPayload.numero_conta
+}]]></ee:set-payload>
+			</ee:message>
+			<ee:variables>
+			</ee:variables>
+		</ee:transform>
+		<http:request method="POST" doc:name="Request" doc:id="9a567673-8c0c-4469-a4cf-eda16799469f" config-ref="SFDC_ENDPOINT" path="/services/data/v50.0/sobjects/{object_name}">
+			<http:headers ><![CDATA[#[{
+	Authorization: "Bearer " ++ vars.sfdc_token
+}]]]></http:headers>
+			<http:uri-params ><![CDATA[#[{
+	object_name: vars.objectName
+}]]]></http:uri-params>
+		</http:request>
+	</flow>
+</mule>

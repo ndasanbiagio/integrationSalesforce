@@ -13,6 +13,7 @@ http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/m
 			<apikit:flow-mapping resource="/teste" action="get" flow-ref="testeFlow" />
 			<apikit:flow-mapping resource="/demo/01/rest" action="get" flow-ref="demo-01-rest-flow" />
 			<apikit:flow-mapping resource="/demo/01/soap" action="get" flow-ref="demo-01-soap-flow" />
+			<apikit:flow-mapping resource="/demo-02/insert" action="post" flow-ref="demo-02-insert-flow" />
 		</apikit:flow-mappings>
 	</apikit:config>
 	<apikit:config outboundHeadersMapName="outboundHeadersMapName" httpStatusVarName="httpStatus" doc:name="Router" doc:id="ba332310-0838-4d95-8019-5ee03a7b549d" name="RouterComponent" api="api\component-api.raml" >
@@ -23,5 +24,8 @@ http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/m
 	<configuration-properties doc:name="Configuration properties" doc:id="8b0d34b4-4b48-4fa6-9181-028617998a9d" file="Local.yaml" />
 	<http:request-config name="SFDC_AUTH" doc:name="HTTP Request configuration" doc:id="c26e83c5-ecd0-4195-8c92-3b9893acbd50" >
 		<http:request-connection protocol="HTTPS" host="${sfdc.auth.host}" />
+	</http:request-config>
+	<http:request-config name="SFDC_ENDPOINT" doc:name="HTTP Request configuration" doc:id="ada5fdc2-c6f6-489d-9f28-0e88a11203f6" >
+		<http:request-connection protocol="HTTPS" host="${sfdc.endpoint.host}" />
 	</http:request-config>
 </mule>

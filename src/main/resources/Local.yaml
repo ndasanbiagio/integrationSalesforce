@@ -11,4 +11,5 @@ sfdc:
     client_id: "3MVG91oqviqJKoEGqzGWrPOvTKMjDLReXbd_ZqfxWSos7ptyO.H6shpumHQFTYXFC8o_iX6cNyC9cNl_CbNsa"
     client_secret: "464ACA7CF337740A590C13E2E93EE0077A51EAD5167EBBF0BF15382A2165781D"
   endpoint:
-    host: "lffconsultoria-dev-ed.my.salesforce.com"
+    host: "taxo-dev-ed.develop.my.salesforce.com
+"
